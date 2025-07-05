@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Marble Particle Header</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      padding-top: 120px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <div class="content">
+    <h1>UDAY AND NIKHIL</h1>
+    <p>Founders of ElitriX Club</p>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+
+    const mouse = { x: null, y: null };
+    window.addEventListener('mousemove', e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    const particles = [];
+    const colors = ['#a8c0ff', '#3f2b96', '#ffffff'];
+
+    for (let i = 0; i < 300; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 5 + 2,
+        dx: (Math.random() - 0.5) * 2.0,
+        dy: (Math.random() - 0.5) * 2.0,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+
+    function drawMarble(x, y, r, color) {
+      const gradient = ctx.createRadialGradient(x - r / 3, y - r / 3, r / 4, x, y, r);
+      gradient.addColorStop(0, "#ffffff");
+      gradient.addColorStop(0.2, color);
+      gradient.addColorStop(1, "#000000");
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        drawMarble(p.x, p.y, p.r, p.color);
+      }
+    }
+
+    function update() {
+      for (let p of particles) {
+        if (mouse.x && mouse.y) {
+          let dx = mouse.x - p.x;
+          let dy = mouse.y - p.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 150) {
+            let angle = Math.atan2(dy, dx);
+            p.x += Math.cos(angle) * 1.5;
+            p.y += Math.sin(angle) * 1.5;
+          }
+        }
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      }
+    }
+
+    function animate() {
+      draw();
+      update();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
