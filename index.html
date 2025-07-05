@@ -91,6 +91,30 @@
     transform: scale(1.1);
   }
   </style>
+  <style>
+    .fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.8s ease-out forwards;
+}
+
+.fade-in.delay-1 {
+  animation-delay: 0.5s;
+}
+.fade-in.delay-2 {
+  animation-delay: 1.2s;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  </style>
 </head>
 <body>
   <!-- ✅ Navbar -->
@@ -109,11 +133,10 @@
   <canvas id="bg"></canvas>
 
   <!-- ✅ Hero Text -->
-  <div class="content">
-    <h1>UDAY AND NIKHIL</h1>
-    <p>Founders of ElitriX Club</p>
-  </div>
-
+<div class="content">
+  <h1 class="fade-in delay-1">THE CURATORS OF QUIET LUXURY</h1>
+  <p class="fade-in delay-2">A space where intention becomes influence, and elegance speaks louder than words.</p>
+</div>
   <!-- ✅ Your animation script -->
   <script>
     const canvas = document.getElementById('bg');
