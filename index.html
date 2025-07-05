@@ -115,6 +115,36 @@
     transform: translateY(0);
   }
   </style>
+  <style>
+   .next-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.95) translateY(100px);
+    transition: all 1.2s ease-in-out;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .next-section.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+  }
+
+  .next-section .inner {
+    text-align: center;
+    padding: 20px;
+  }
+  </style>
 </head>
 <body>
   <!-- ✅ Navbar -->
@@ -217,6 +247,24 @@
     }
 
     animate();
+    // 👇 Scroll trigger for cinematic section transition
+window.addEventListener('scroll', () => {
+  const trigger = window.innerHeight * 0.2;
+  const next = document.querySelector('.next-section');
+
+  if (window.scrollY > trigger) {
+    next.classList.add('visible');
+  } else {
+    next.classList.remove('visible');
+  }
+});
   </script>
+  <!-- ✅ New full-screen rising section -->
+<section class="next-section">
+  <div class="inner">
+    <h2>About Us</h2>
+    <p>We build brand legacy through influence, wellness, and elegance.</p>
+  </div>
+</section>
 </body>
 </html>
