@@ -8,9 +8,11 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      overflow-x: hidden; /* ✅ Allow vertical scroll */
+      font-family: 'Segoe UI', sans-serif;
       background: #000;
     }
+
     canvas {
       position: fixed;
       top: 0;
@@ -19,139 +21,111 @@
       width: 100vw;
       height: 100vh;
     }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .navbar nav {
+      display: flex;
+    }
+
+    .navbar nav a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar nav a:hover {
+      color: #4b9fff;
+      transform: scale(1.1);
+    }
+
     .content {
       position: relative;
       z-index: 1;
       text-align: center;
       color: white;
-      font-family: 'Segoe UI', sans-serif;
-      padding-top: 120px;
+      padding-top: 140px;
+    }
 
-  </style>
-  <style>
-    html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
-  }
-  canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    width: 100vw;
-    height: 100vh;
-  }
-  .content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    padding-top: 120px;
-  }
-
-  /* ✅ Navbar Styles */
-  .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 10;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-  }
-
-  .navbar nav {
-    display: flex;
-  }
-
-  .navbar nav a {
-    margin-left: 30px;
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    font-family: 'Segoe UI', sans-serif;
-  }
-
-  .navbar nav a:hover {
-    color: #4b9fff;
-    transform: scale(1.1);
-  }
-  </style>
-  <style>
     .fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1.8s ease-out forwards;
-}
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1.8s ease-out forwards;
+    }
 
-.fade-in.delay-1 {
-  animation-delay: 0.5s;
-}
-.fade-in.delay-2 {
-  animation-delay: 1.2s;
-}
+    .fade-in.delay-1 {
+      animation-delay: 0.5s;
+    }
 
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  </style>
-  <style>
-   .next-section {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.85);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: scale(0.95) translateY(100px);
-    transition: all 1.2s ease-in-out;
-    pointer-events: none;
-    z-index: 3;
-  }
+    .fade-in.delay-2 {
+      animation-delay: 1.2s;
+    }
 
-  .next-section.visible {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    pointer-events: auto;
-  }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  .next-section .inner {
-    text-align: center;
-    padding: 20px;
-  }
+    .next-section {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.95) translateY(100px);
+      transition: all 1.2s ease-in-out;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .next-section.visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+
+    .next-section .inner {
+      text-align: center;
+      padding: 20px;
+    }
   </style>
 </head>
 <body>
   <!-- ✅ Navbar -->
   <header class="navbar">
-   <div class="logo">
-  <img src="https://github.com/Udaymangla0/uday-website/blob/main/Asset%208.png?raw=true" style="height: 40px;" alt="ElitriX Logo">
-</div>
+    <div class="logo">
+      <img src="https://github.com/Udaymangla0/uday-website/blob/main/Asset%208.png?raw=true" style="height: 40px;" alt="ElitriX Logo">
+    </div>
     <nav>
       <a href="#">Home</a>
       <a href="#">Services</a>
@@ -163,11 +137,23 @@
   <canvas id="bg"></canvas>
 
   <!-- ✅ Hero Text -->
-<div class="content">
-  <h1 class="fade-in delay-1">THE CURATORS OF QUIET LUXURY</h1>
-  <p class="fade-in delay-2">A space where intention becomes influence, and elegance speaks louder than words.</p>
-</div>
-  <!-- ✅ Your animation script -->
+  <div class="content">
+    <h1 class="fade-in delay-1">THE CURATORS OF QUIET LUXURY</h1>
+    <p class="fade-in delay-2">A space where intention becomes influence, and elegance speaks louder than words.</p>
+  </div>
+
+  <!-- 🔧 Spacer to allow scroll -->
+  <div style="height: 120vh;"></div>
+
+  <!-- ✅ Cinematic Full-screen Section -->
+  <section class="next-section">
+    <div class="inner">
+      <h2>About Us</h2>
+      <p>We build brand legacy through influence, wellness, and elegance.</p>
+    </div>
+  </section>
+
+  <!-- ✅ JavaScript for Animation + Transition -->
   <script>
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
@@ -247,24 +233,18 @@
     }
 
     animate();
-    // 👇 Scroll trigger for cinematic section transition
-window.addEventListener('scroll', () => {
-  const trigger = window.innerHeight * 0.2;
-  const next = document.querySelector('.next-section');
 
-  if (window.scrollY > trigger) {
-    next.classList.add('visible');
-  } else {
-    next.classList.remove('visible');
-  }
-});
+    // Scroll-triggered cinematic overlay effect
+    window.addEventListener('scroll', () => {
+      const trigger = window.innerHeight * 0.2;
+      const next = document.querySelector('.next-section');
+      if (window.scrollY > trigger) {
+        next.classList.add('visible');
+      } else {
+        next.classList.remove('visible');
+      }
+    });
   </script>
-  <!-- ✅ New full-screen rising section -->
-<section class="next-section">
-  <div class="inner">
-    <h2>About Us</h2>
-    <p>We build brand legacy through influence, wellness, and elegance.</p>
-  </div>
-</section>
 </body>
 </html>
+
